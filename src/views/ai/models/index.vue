@@ -1,6 +1,6 @@
 <template>
    <div>
-      banner
+      models
    </div>
 </template>
 

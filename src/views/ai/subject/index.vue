@@ -1,6 +1,6 @@
 <template>
    <div>
-      banner
+      subject
    </div>
 </template>
 

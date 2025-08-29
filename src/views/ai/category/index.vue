@@ -1,12 +1,13 @@
 <template>
    <div>
-      banner
+      category
    </div>
 </template>
 
 <script setup>
    
 </script>
+
 
 <style>
    
