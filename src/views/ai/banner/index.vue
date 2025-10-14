@@ -12,15 +12,15 @@
     </el-form>
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
-        <el-button type="primary" plain icon="Plus" @click="handleAdd" v-hasPermi="['system:role:add']">新增</el-button>
+        <el-button type="primary" plain icon="Plus" @click="handleAdd" v-hasPermi="['ai:banner:add']">新增</el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button type="success" plain icon="Edit" :disabled="single" @click="handleUpdate"
-          v-hasPermi="['system:role:edit']">修改</el-button>
+          v-hasPermi="['ai:banner:update']">修改</el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button type="danger" plain icon="Delete" :disabled="multiple" @click="handleDelete"
-          v-hasPermi="['system:role:remove']">删除</el-button>
+          v-hasPermi="['ai:banner:remove']">删除</el-button>
       </el-col>
       <right-toolbar v-model:showSearch="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
@@ -41,11 +41,11 @@
         <template #default="scope">
           <el-tooltip content="修改" placement="top" v-if="scope.row.id !== 1">
             <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)"
-              v-hasPermi="['system:role:edit']"></el-button>
+              v-hasPermi="['ai:banner:edit']"></el-button>
           </el-tooltip>
           <el-tooltip content="删除" placement="top" v-if="scope.row.id !== 1">
             <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)"
-              v-hasPermi="['system:role:remove']"></el-button>
+              v-hasPermi="['ai:banner:remove']"></el-button>
           </el-tooltip>
         </template>
       </el-table-column>
@@ -63,6 +63,9 @@
         <el-form-item label="链接" prop="url">
           <el-input v-model="form.url" placeholder="请输入链接" />
         </el-form-item>
+         <el-form-item label="排序字段" prop="orderNum">
+              <el-input-number v-model="form.orderNum" controls-position="right" :min="0" />
+            </el-form-item>
         <el-form-item label="图片" prop="image">
           <el-upload action="/dev-api/file/upload" :headers="headerObj" 
           :limit="1"
@@ -114,7 +117,8 @@ const data = reactive({
   },
   rules: {
     title: [{ required: true, message: "名称不能为空", trigger: "blur" }],
-    url: [{ required: true, message: "链接不能为空", trigger: "blur" }]
+    url: [{ required: true, message: "链接不能为空", trigger: "blur" }],
+    orderNum: [{ required: true, message: "排序字段不能为空", trigger: "blur" }]
   },
 })
 
@@ -174,7 +178,8 @@ function reset() {
     id: undefined,
     title: undefined,
     url: undefined,
-    image: undefined
+    image: undefined,
+    orderNum: undefined
   }
   proxy.resetForm("bannerRef")
 }

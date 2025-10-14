@@ -1,44 +1,44 @@
 import request from '@/utils/request'
 
 
-export function listBanner(query) {
+export function listCategory(query) {
   return request({
-    url: '/banner/list',
+    url: '/category/list',
     method: 'get',
     params: query
   })
 }
 
 
-export function getBanner(bannerId) {
+export function getCategory(categoryId) {
   return request({
-    url: '/banner/' + bannerId,
+    url: '/category/' + categoryId,
     method: 'get'
   })
 }
 
 // 新增
-export function addBanner(data) {
+export function addCategory(data) {
   return request({
-    url: '/banner',
+    url: '/category',
     method: 'post',
     data: data
   })
 }
 
 // 修改
-export function updateBanner(data) {
+export function updateCategory(data) {
   return request({
-    url: '/banner',
+    url: '/category',
     method: 'put',
     data: data
   })
 }
 
 // 删除
-export function delBanner(bannerIds) {
+export function delCategory(categoryIds) {
   return request({
-    url: '/banner/' + bannerIds,
+    url: '/category/' + categoryIds,
     method: 'delete'
   })
 }
