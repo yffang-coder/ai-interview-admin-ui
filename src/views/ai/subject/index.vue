@@ -81,7 +81,7 @@
                <el-input-number v-model="form.orderNum" controls-position="right" :min="0" />
             </el-form-item>
             <el-form-item label="图标" prop="src">
-               <el-upload action="/dev-api/file/upload" :headers="headerObj" :limit="1" :on-success="fileUploadSuccess">
+               <el-upload action="/prod-api/file/upload" :headers="headerObj" :limit="1" :on-success="fileUploadSuccess">
                   <el-button type="primary">上传图片</el-button>
                </el-upload>
             </el-form-item>
