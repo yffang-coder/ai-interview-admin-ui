@@ -131,6 +131,23 @@ export const dynamicRoutes = [
     ]
   },
   {
+    path: '/ai',
+    component: Layout,
+    alwaysShow: true,
+    name: 'AiManage',
+    // top-level permission to show AI management group
+    permissions: ['ai:alarm:*'],
+    children: [
+      {
+        path: 'alarm',
+        component: () => import('@/views/ai/alarm/index.vue'),
+        name: 'Alarm',
+        meta: { title: '告警管理', icon: 'alarm' },
+        permissions: ['ai:alarm:*']
+      }
+    ]
+  },
+  {
     path: '/monitor/job-log',
     component: Layout,
     hidden: true,

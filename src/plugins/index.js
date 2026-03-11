@@ -3,6 +3,7 @@ import auth from './auth'
 import cache from './cache'
 import modal from './modal'
 import download from './download'
+import * as stomp from './stomp'
 
 export default function installPlugins(app){
   // 页签操作
@@ -15,4 +16,6 @@ export default function installPlugins(app){
   app.config.globalProperties.$modal = modal
   // 下载文件
   app.config.globalProperties.$download = download
+  // stomp 实时消息
+  app.config.globalProperties.$stomp = stomp
 }

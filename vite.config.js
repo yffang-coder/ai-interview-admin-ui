@@ -14,6 +14,9 @@ export default defineConfig(({ mode, command }) => {
     // 例如 https://www.ruoyi.vip/。如果应用被部署在一个子路径上，你就需要用这个选项指定这个子路径。例如，如果你的应用被部署在 https://www.ruoyi.vip/admin/，则设置 baseUrl 为 /admin/。
     base: VITE_APP_ENV === 'production' ? '/' : '/',
     plugins: createVitePlugins(env, command === 'build'),
+      define: {
+        global: 'window'
+      },
     resolve: {
       // https://cn.vitejs.dev/config/#resolve-alias
       alias: {
@@ -50,6 +53,7 @@ export default defineConfig(({ mode, command }) => {
         '/dev-api': {
           target: baseUrl,
           changeOrigin: true,
+          ws: true,
           rewrite: (p) => p.replace(/^\/dev-api/, '')
         },
          // springdoc proxy
