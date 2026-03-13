@@ -81,7 +81,7 @@
                <el-input-number v-model="form.orderNum" controls-position="right" :min="0" />
             </el-form-item>
             <el-form-item label="图标" prop="src">
-               <el-upload action="/prod-api/file/upload" :headers="headerObj" :limit="1" :on-success="fileUploadSuccess">
+               <el-upload action="/prod-api/file/upload" :headers="headerObj" :limit="1" :show-file-list="false" v-model:file-list="uploadFileList" :on-success="fileUploadSuccess">
                   <el-button type="primary">上传图片</el-button>
                </el-upload>
             </el-form-item>
@@ -118,6 +118,7 @@ const total = ref(0)
 const title = ref("")
 const dateRange = ref([])
 const headerObj = ref({ Authorization: "Bearer " + getToken() })
+const uploadFileList = ref([])
 
 
 const data = reactive({
@@ -148,8 +149,9 @@ function handleEnableChange(row) {
    })
 }
 function fileUploadSuccess(res) {
-   form.value.src = res.msg
-   console.log(res.msg)
+   form.value.src = res?.data ?? res?.url ?? res?.msg
+   uploadFileList.value = []
+   console.log(form.value.src)
 }
 
 /** 查询科目列表 */
@@ -203,6 +205,7 @@ function reset() {
       orderNum: undefined,
       name: undefined
    }
+   uploadFileList.value = []
    proxy.resetForm("categoryRef")
 }
 

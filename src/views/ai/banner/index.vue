@@ -69,6 +69,8 @@
         <el-form-item label="图片" prop="image">
           <el-upload action="/prod-api/file/upload" :headers="headerObj" 
           :limit="1"
+          :show-file-list="false"
+          v-model:file-list="uploadFileList"
           :on-success="fileUploadSuccess">
             <el-button type="primary">上传图片</el-button>
           </el-upload>
@@ -104,6 +106,7 @@ const total = ref(0)
 const title = ref("")
 const dateRange = ref([])
 const headerObj = ref({ Authorization: "Bearer " + getToken() })
+const uploadFileList = ref([])
 
 
 const data = reactive({
@@ -126,8 +129,9 @@ const { queryParams, form, rules } = toRefs(data)
 
 
 function fileUploadSuccess(res) {
-  form.value.image = res.msg
-  console.log(res.msg)
+  form.value.image = res?.data ?? res?.url ?? res?.msg
+  uploadFileList.value = []
+  console.log(form.value.image)
 } 
 
 /** 查询角色列表 */
@@ -181,6 +185,7 @@ function reset() {
     image: undefined,
     orderNum: undefined
   }
+  uploadFileList.value = []
   proxy.resetForm("bannerRef")
 }
 

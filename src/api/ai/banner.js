@@ -19,19 +19,21 @@ export function getBanner(bannerId) {
 
 // 新增
 export function addBanner(data) {
+  const isFormData = typeof FormData !== 'undefined' && data instanceof FormData
   return request({
     url: '/banner',
     method: 'post',
-    data: data
+    ...(isFormData ? { data } : { params: data })
   })
 }
 
 // 修改
 export function updateBanner(data) {
+  const isFormData = typeof FormData !== 'undefined' && data instanceof FormData
   return request({
     url: '/banner',
     method: 'put',
-    data: data
+    ...(isFormData ? { data } : { params: data })
   })
 }
 

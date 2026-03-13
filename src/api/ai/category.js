@@ -28,10 +28,11 @@ export function addCategory(data) {
 
 // 修改
 export function updateCategory(data) {
+  const isFormData = typeof FormData !== 'undefined' && data instanceof FormData
   return request({
     url: '/category',
     method: 'put',
-    data: data
+    ...(isFormData ? { data } : { params: data })
   })
 }
 
